@@ -1,0 +1,31 @@
+<div>
+    <div>
+        <h4>Clientes de: {{data.sellerName}}</h4>
+    </div>
+    <div class="searcher">
+        <form [formGroup]="form">
+        <mat-form-field class="example-full-width">
+            <mat-label>Por Clave/Nombre</mat-label>
+            <input matInput type="text" formControlName="hint">
+          </mat-form-field>
+          <mat-icon *ngIf="!filtered" (click)="search()">search</mat-icon>
+          <mat-icon *ngIf="filtered" (click)="cancelSearch()">close</mat-icon>
+          <button mat-raised-button class="add_client" (click)="register()">Nuevo Cliente</button>  
+        </form>
+        
+    </div>
+    <div class="list-clients">
+        <div class="loading-list-clients" *ngIf="isLoading">
+            <mat-spinner [diameter]="70"></mat-spinner>
+        </div>
+        
+        <div class="item-list" *ngFor="let client of clients; let index=index">
+
+            <div class="item-list-client">
+                {{client.keyClient}}    {{client.name}}
+            </div>
+            <button mat-raised-button (click)="details(index)" class="item-list-client-details">Ver</button>
+        </div>
+    </div>
+<button mat-raised-button color="warn" (click)="close()"> Cerrar </button>
+</div>

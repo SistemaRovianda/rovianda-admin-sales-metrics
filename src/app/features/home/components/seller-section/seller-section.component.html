@@ -1,0 +1,103 @@
+
+
+<div style="text-align: center; display: inline-block;" *ngIf="isLoading">
+    <mat-spinner [radio]="70" [color]="green"></mat-spinner>
+</div>
+<div class="searchSeller">
+    <form [formGroup]="form">
+        <mat-form-field class="example-full-width">
+            <mat-label>Por Nombre</mat-label>
+            <input matInput type="text" formControlName="hint">
+          </mat-form-field>
+          <mat-icon *ngIf="!filtered" (click)="search()">search</mat-icon>
+          <mat-icon *ngIf="filtered" (click)="cancelSearch()">close</mat-icon>
+        </form>
+</div>
+<div *ngIf="!isLoading">
+    
+            <h4>Vendedores</h4>
+            <div class="sellers-container">
+            <mat-expansion-panel class="expansion_container" *ngFor="let seller of sellers; let index=index" (opened)="select(index)" >
+                <mat-expansion-panel-header class="seller-slider">
+                <mat-panel-title>
+                    {{seller.cve}}
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{seller.name}}
+                    <!--- <mat-icon>account_circle</mat-icon>!--->
+                </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div>
+                    <button mat-raised-button color="primary" (click)="showClientsBySeller(index)">Clientes</button>
+                </div>
+                <div class="acumulated">
+                    <label>Acumulado: {{seller.amountAcumulated}}</label>
+                    <label>Peso total: {{seller.weightAcumulated}}</label>
+                </div>
+            </mat-expansion-panel>
+            
+            </div>
+    
+        
+                <div class="reports">
+                    <h4>Reportes</h4>
+                <div  class="seller-slider-content">
+                    <div class="date-picker">
+
+                        <mat-form-field appearance="fill" class="datePicker1">
+                            <mat-label>Desde:</mat-label>
+                            <input matInput [matDatepicker]="picker" [(ngModel)]="dateStart">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill" class="datePicker2">
+                            <mat-label>Hasta:</mat-label>
+                            <input matInput [matDatepicker]="picker2"  [(ngModel)]="dateEnd">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+
+                    </div>
+                    <label><strong>Periodo</strong></label>
+                    <div class="type-report">
+                        
+                        <mat-radio-group aria-label="Selecciona un tipo de reporte">
+                            <mat-radio-button value="1">Por día</mat-radio-button>
+                            <mat-radio-button value="2">Por semana</mat-radio-button>
+                            <mat-radio-button value="3">Por Mes</mat-radio-button>
+                            <mat-radio-button value="4">Por Año</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <label><strong>Filtros</strong></label>
+                    <div class="filters-buttons">
+
+                        <button mat-raised-button>Vendedores</button>
+                        <button mat-raised-button>Clientes</button>
+                        <button mat-raised-button>Productos</button>
+                        
+                    </div>
+                    <div class="filters">
+                        
+                        <div class="list-sellers">
+
+                        </div>
+                        <div class="list-clients">
+
+                        </div>
+                        <div class="list-products">
+
+                        </div>
+                    </div>
+                 
+                
+                    
+                    <div class="report-selection">
+                        
+                        <button mat-raised-button color="primary" (click)="downloadReport()">Descargar Reporte de Ventas</button>
+                    </div>
+                    
+                </div>
+        </div>
+    
+</div>

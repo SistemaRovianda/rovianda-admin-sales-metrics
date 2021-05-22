@@ -1,0 +1,77 @@
+<div class="client-details-modal">
+    <div>
+        <h4>Detalles del cliente</h4>
+    </div>
+    <form class="form-client" [formGroup]="form">
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Código</mat-label>
+            <input type="text" matInput formControlName="keyClient" >
+          </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Nombre</mat-label>
+          <input type="text" matInput formControlName="name" >
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Tipo</mat-label>
+            <input type="text" matInput formControlName="typeClient" >
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>Calle</mat-label>
+            <input type="text" matInput formControlName="street" >
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width">
+            <mat-label>Colonia</mat-label>
+            <input type="text" matInput formControlName="suburb" >
+          </mat-form-field>
+
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Cp</mat-label>
+            <input type="text" matInput formControlName="cp" >
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width">
+            <mat-label>Estado</mat-label>
+            <input type="text" matInput formControlName="state" >
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Ciudad</mat-label>
+            <input type="text" matInput formControlName="city" >
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width">
+            <mat-label>Código de aspel (código de enlace)</mat-label>
+            <input type="text" matInput formControlName="keySaeNew" >
+          </mat-form-field>
+      </form>
+
+      <div>
+          <h4>Días de visita</h4>
+          <div class="days_container">
+            <mat-checkbox [(ngModel)]="daysVisit.monday" [disabled]="!isEditing || isLoading">Lunes</mat-checkbox>
+            <mat-checkbox [(ngModel)]="daysVisit.tuesday" [disabled]="!isEditing || isLoading">Martes</mat-checkbox>
+            <mat-checkbox [(ngModel)]="daysVisit.wednesday" [disabled]="!isEditing || isLoading">Miercoles</mat-checkbox>
+            <mat-checkbox [(ngModel)]="daysVisit.thursday" [disabled]="!isEditing || isLoading">Jueves</mat-checkbox>
+            <mat-checkbox [(ngModel)]="daysVisit.friday" [disabled]="!isEditing || isLoading">Viernes</mat-checkbox>
+            <mat-checkbox [(ngModel)]="daysVisit.saturday" [disabled]="!isEditing || isLoading">Sabado</mat-checkbox>
+            <mat-checkbox [(ngModel)]="daysVisit.sunday" [disabled]="!isEditing || isLoading">Domingo</mat-checkbox>
+          </div>
+      </div>
+      <br>
+      <mat-checkbox class="example-margin" (change)="editCheck($event)" [disabled]="isLoading" *ngIf="!data.register" >Editar</mat-checkbox>
+      <br>
+      <button mat-raised-button [disabled]="!isEditing || isLoading" (click)="updateClient()" *ngIf="!data.register">Actualizar</button>
+      <button mat-raised-button   (click)="register()" *ngIf="data.register" [disabled]="isLoading" >Registrar</button>
+      <button mat-raised-button [disabled]="isEditing || isLoading" (click)="deleteClient()" *ngIf="!data.register">Eliminar</button>
+      <button mat-raised-button color="warn" [disabled]="isLoading" (click)="close()">Cerrar</button>
+      <br>
+      <div class="updating-client" *ngIf="isLoading">
+        <mat-spinner [diameter]="70"></mat-spinner>
+    </div>
+</div>

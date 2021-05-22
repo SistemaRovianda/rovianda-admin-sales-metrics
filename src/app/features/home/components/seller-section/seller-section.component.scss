@@ -1,0 +1,66 @@
+.seller-slider:hover{
+    background: #138fed !important;
+    color: white;
+}
+
+.date-piker{
+    width: "100%";
+}
+.datePicker1{
+    float: left;
+}
+.datePicker2{
+    float: right;
+}
+.seller-slider-content{
+    display: grid;
+    width: 80%;
+}
+.type-report{
+    margin-bottom: 10px;
+    flex-direction: row;
+    align-content: space-between;
+}
+.filters{
+    display: flex;
+    justify-content: space-between;
+}
+.list-sellers{
+    height: 200px;
+    width: 25%;
+    background-color: rgb(205, 201, 201);
+    overflow-y: scroll;
+    float: left
+}
+.list-clients{
+    height: 200px;
+    width: 25%;
+    background-color: rgb(205, 201, 201);
+    overflow-y: scroll;
+    
+}
+.list-products{
+    height: 200px;
+    background-color: rgb(205, 201, 201);
+    overflow-y: scroll;
+    width: 25%;
+    
+}
+.sellers-container{
+    height: 400px;
+    overflow-y: scroll;
+    border: black solid 1px;
+}
+.expansion_container{
+    width: 300px;
+    float: left;
+}
+.filters-buttons{
+    display: flex;
+    justify-content: space-between;
+}
+.reports{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

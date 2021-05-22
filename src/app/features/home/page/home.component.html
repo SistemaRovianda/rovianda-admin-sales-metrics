@@ -1,0 +1,83 @@
+<div class="{{isDeleting?'overlay':''}}">
+    <div>
+        
+        <h4>Usuario: {{username}}</h4>
+    </div>
+<div>
+<ul>
+    <li><img src="assets/images/grupo-6.png" ></li>
+    <li><label class="{{section=='sales'?'active':''}}" (click)="loadSalesSection()">Ventas</label></li>
+    <li><label class="{{section=='sellers'?'active':''}}" (click)="loadSellerSection()">Vendedores</label></li>
+    <li style="float:right"><label (click)="logout()">Cerrar Sesión</label></li>
+</ul>
+</div>
+<div class="sales_container"  *ngIf="section=='sales'">
+<div style="text-align: center;">
+    <form [formGroup]="form">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Desde</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="from">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Hasta</mat-label>
+        <input matInput [matDatepicker]="picker2" formControlName="to">
+        <mat-datepicker-toggle matSuffix [for]="picker2">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+      <button mat-stroked-button color="primary" (click)="table.searchByDate(from.value,to.value)">
+        <mat-icon>search</mat-icon>
+    </button>
+    </form>
+</div>
+<div class="buttons-actions">
+    <!-- <button mat-stroked-button color="primary" (click)="confirm()">Guardar</button>
+    <button mat-stroked-button color="warn" (click)="restore()">Revertir</button> -->
+    
+    <button mat-stroked-button color="primary" (click)="table.search(null)">
+        <mat-icon>autorenew</mat-icon>
+    </button>
+</div>
+<div>
+    <app-table-sales #table></app-table-sales>
+</div>
+<div class="cards">
+    <mat-card class="card-amount">
+    <h1>Venta total:</h1><br><h1 style="text-align: center;"> $ {{acumulated.total?acumulated.total:0}}</h1></mat-card>
+    <mat-card class="card-amount"><h1>Contado total:</h1><br><h1 style="text-align: center;"> $ {{acumulated.contado?acumulated.contado:0}}</h1></mat-card>
+    <mat-card class="card-amount"><h1>Crédito total:</h1><br><h1 style="text-align: center;"> $ {{acumulated.credito?acumulated.credito:0}}</h1></mat-card>
+    <mat-card class="card-amount"><h1>Cobranza total:</h1><br><h1 style="text-align: center;"> $ {{acumulated.cobranza?acumulated.cobranza:0}}</h1></mat-card>
+    <!-- <mat-card class="card-sales" >
+        <h1>Ventas removidas:</h1>
+        <div style="text-align: center;">
+        <mat-icon (click)="showSalesTaked()">format_list_numbered</mat-icon>
+    </div>
+        
+        <h1 style="text-align: center; margin-bottom: 5px;"> {{totalSalesRemoved.length}}</h1>
+        </mat-card> -->
+
+        <!-- <mat-card class="card-sales" (click)="getReport()" *ngIf="hasDeleted">
+        
+            <h1 style="margin-bottom: 1px;">Descargar reporte</h1>
+            
+            <div *ngIf="!isDownloadingReport" style="margin-left: 30%; margin-top: 0%;">
+                <img src="assets/images/download.png" style=" width: 70px; height: 70px; margin-top: 0%;" >
+            </div>
+            <div *ngIf="isDownloadingReport" style="margin-left: 30%; ">
+                <mat-spinner  diameter="70"></mat-spinner>
+            </div>
+        </mat-card> -->
+</div>
+
+</div>
+<div class="seller_setion" style="text-align: center;" *ngIf="section=='sellers'">
+  <app-seller-section></app-seller-section>
+</div>
+
+</div>
+

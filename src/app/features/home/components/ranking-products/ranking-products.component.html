@@ -1,0 +1,37 @@
+<div class="ranking-products-container">
+    <mat-icon class="close-modal" (click)="closeModal()">close</mat-icon>
+    <label class="title">Productos mas vendidos</label><br>
+    <label class="sub-title-dates">Desde: {{dateStart}} hasta: {{dateEnd}}</label><br>
+    <div *ngIf="!selection" class="products-ranking-container">
+        <div *ngFor="let product of data.products; let index=index" class="product-ranking-item" (click)="select(index)" >
+            <label class="quantity-container"> {{parseAmount(product.quantity)}} {{(product.uniMed=="KG")?"Kilos":"Paquetes"}} -> </label>     
+           <label class="amount-container">$ {{parseAmount(product.amount)}}</label>
+           <label class="name-container">{{product.name}}    {{product.typePresentation}}</label>
+        </div>
+    </div>
+    <div *ngIf="selection">
+        <mat-icon (click)="back()">arrow_back</mat-icon>
+        <label class="product-selected">Producto: {{selection.name}} {{selection.typePresentation}}</label>
+        <div class="product-selected-ranking">
+            
+                <mat-spinner *ngIf="isLoading" class="spinner-ranking-sellers-product" [diameter]="70"></mat-spinner>
+                <div *ngFor="let seller of rankingSellersByProduct" class="ranking-sellers-item-container">
+                    <label>{{seller.name}}  </label>
+                    <label class="ranking-sellers-item-container-sub-item">{{parseAmount(seller.quantity)}} {{selection.uniMed=="PZ"?"Paquetes":"Kilos"}} -> ${{parseAmount(seller.amount)}}</label>
+                </div>
+        </div>
+        <div class="cards-container">
+        <div class="card-total-weight">
+            <img src="assets/images/weightmachine.png" alt="Peso total">
+            <label>{{totalWeight}} {{uniMed=="PZ"?"Paquetes":"Kilos"}}</label>
+        </div>
+        <div class="card-total-bill">
+            <img src="assets/images/billicon.png" alt="Monto total">
+            <label>${{totalBill}}</label>
+        </div>
+        </div>
+    </div>
+    <div class="report-products-solded-ranking" >
+        <button mat-button mat-raised-button color="default" (click)="showModalDownload()">Reporte</button>
+    </div>
+</div>

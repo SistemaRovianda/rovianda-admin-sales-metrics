@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/salvadorkano/Desktop/ToolSalesRovianda/ventas-metrics/src/main.ts */"zUnb");
+module.exports = __webpack_require__(/*! C:\Users\Ignacio\Desktop\Proyectos\Rovianda\rovianda-admin-metrics\src\main.ts */"zUnb");
 
 
 /***/ }),
@@ -47,7 +47,7 @@ class SaleEffects {
             //console.log("ERROR",err);
             return [_sales_actions__WEBPACK_IMPORTED_MODULE_3__["setTicketOfSale"]({ ticket: "" })];
         })))));
-        this.getAcumulated$ = Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_1__["createEffect"])(() => this.actions.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_1__["ofType"])(_sales_actions__WEBPACK_IMPORTED_MODULE_3__["getAcumulated"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["exhaustMap"])((action) => this.roviandaApi.getAcumulated(action.dateFrom, action.dateTo).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["switchMap"])((res) => [_sales_actions__WEBPACK_IMPORTED_MODULE_3__["setAcumulated"](res)]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])((err) => [_sales_actions__WEBPACK_IMPORTED_MODULE_3__["setAcumulated"]({ contado: "0", credito: "0", total: "0", cobranza: "0" })])))));
+        this.getAcumulated$ = Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_1__["createEffect"])(() => this.actions.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_1__["ofType"])(_sales_actions__WEBPACK_IMPORTED_MODULE_3__["getAcumulated"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["exhaustMap"])((action) => this.roviandaApi.getAcumulated(action.dateFrom, action.dateTo).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["switchMap"])((res) => [_sales_actions__WEBPACK_IMPORTED_MODULE_3__["setAcumulated"](res)]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])((err) => [_sales_actions__WEBPACK_IMPORTED_MODULE_3__["setAcumulated"]({ contado: 0, credito: 0, total: 0, cobranza: 0, totalKg: 0 })])))));
         this.deleteSales$ = Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_1__["createEffect"])(() => this.actions.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_1__["ofType"])(_sales_actions__WEBPACK_IMPORTED_MODULE_3__["deleteSalesSuperAdmin"]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["exhaustMap"])((action) => this.roviandaApi.delSalesOfSystem(action.salesIds, action.date).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["switchMap"])(() => [_sales_actions__WEBPACK_IMPORTED_MODULE_3__["deleteSalesSuperAdminSuccess"]()]), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])((err) => [_sales_actions__WEBPACK_IMPORTED_MODULE_3__["deleteSalesSuperAdminFail"]({ error: err.message })])))));
     }
 }
@@ -78,7 +78,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false,
-    basePath: "https://us-central1-sistema-rovianda.cloudfunctions.net/app/rovianda" //"https://us-central1-rovianda-88249.cloudfunctions.net/app/rovianda""http://localhost:5001/sistema-rovianda/us-central1/app/rovianda",//
+    basePath: "https://us-central1-sistema-rovianda.cloudfunctions.net/app/rovianda" //"https://us-central1-rovianda-88249.cloudfunctions.net/app/rovianda",//"http://localhost:5001/sistema-rovianda/us-central1/app/rovianda"//"http://localhost:5001/sistema-rovianda/us-central1/app/rovianda"//"http://localhost:5001/sistema-rovianda/us-central1/app/rovianda"//"http://localhost:5001/sistema-rovianda/us-central1/app/rovianda"//
 };
 /*
  * For easier debugging in development mode, you can import the following file
@@ -117,10 +117,11 @@ const initValue = {
     isDeletingSales: false,
     errorDeleting: null,
     acumulated: {
-        cobranza: "0",
-        contado: "0",
-        credito: "0",
-        total: "0"
+        cobranza: 0,
+        contado: 0,
+        credito: 0,
+        total: 0,
+        totalKg: 0
     }
 };
 const saleReducer = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createReducer"])(initValue, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["on"])(_sales_actions__WEBPACK_IMPORTED_MODULE_1__["getAllSalesForSuperAdmin"], (state) => (Object.assign(Object.assign({}, state), { loading: true }))), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["on"])(_sales_actions__WEBPACK_IMPORTED_MODULE_1__["setAllSalesForSuperAdmin"], (state, { sales, count }) => (Object.assign(Object.assign({}, state), { sales, loading: false, count }))), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["on"])(_sales_actions__WEBPACK_IMPORTED_MODULE_1__["sendAllRemovesToSystemSuccess"], (state) => (Object.assign(Object.assign({}, state), { sales: [], loading: false, count: 0 }))), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["on"])(_sales_actions__WEBPACK_IMPORTED_MODULE_1__["sendAllRemovesToSystemError"], (state) => (Object.assign(Object.assign({}, state), { loading: false }))), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["on"])(_sales_actions__WEBPACK_IMPORTED_MODULE_1__["addRemoveSale"], (state, { id }) => {
@@ -214,9 +215,13 @@ class RoviandaApiService {
     getAllSellers() {
         return this.http.get(`${this.path}/admin-sales/sellers`);
     }
-    loadAcumulatedBySeller(sellerId, date) {
-        let params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]().set("date", date);
+    loadAcumulatedBySeller(sellerId, date, dateTo) {
+        let params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]().set("from", date).set("to", dateTo);
         return this.http.get(`${this.path}/get-status/sales/${sellerId}`, { params });
+    }
+    downloadSummary(sellerId, date, dateTo, type) {
+        let params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]().set("from", date).set("to", dateTo).set("type", type);
+        return this.http.get(`${this.path}/report/seller/summary/${sellerId}`, { params, responseType: "blob" });
     }
     getClientOfSeller(sellerId) {
         return this.http.get(`${this.path}/seller-clients/` + sellerId);
@@ -235,6 +240,42 @@ class RoviandaApiService {
     }
     deleteLogicClient(clientId) {
         return this.http.delete(`${this.path}/client-delete/` + clientId);
+    }
+    getAllClients() {
+        return this.http.get(`${this.path}/admin-sales/allclients`);
+    }
+    getAllProducts() {
+        return this.http.get(`${this.path}/admin-sales/allproducts`);
+    }
+    getChartGeneralSalesMetrics(dateStart, dateEnd) {
+        let params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]();
+        params = params.set("dateStart", dateStart);
+        params = params.set("dateEnd", dateEnd);
+        return this.http.get(`${this.path}/metrics/general/admin-sales`, { params });
+    }
+    getRankingSellersByProduct(presentationId, dateStart, dateEnd) {
+        let params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]().set("dateStart", dateStart).set("dateEnd", dateEnd);
+        return this.http.get(`${this.path}/metrics/general/rankin-sellers/` + presentationId, { params });
+    }
+    getRankingOfSellersByDate(dateStart, dateEnd) {
+        let params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]().set("dateStart", dateStart).set("dateEnd", dateEnd);
+        return this.http.get(`${this.path}/metrics/general/ranking/sellers`, { params });
+    }
+    getReportRankingOfProducts(dateStart, dateEnd, type) {
+        let params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]().set("dateStart", dateStart).set("dateEnd", dateEnd).set("type", type);
+        return this.http.get(`${this.path}/metrics/report/general/admin-sales`, { params, responseType: 'blob' });
+    }
+    getReportRankingOfProductsByProduct(presentationId, dateStart, dateEnd, type) {
+        let params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]().set("dateStart", dateStart).set("dateEnd", dateEnd).set("type", type);
+        return this.http.get(`${this.path}/metrics/report/general/rankin-sellers/` + presentationId, { params, responseType: 'blob' });
+    }
+    getReportRankingOfSellers(dateStart, dateEnd, type) {
+        let params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]().set("dateStart", dateStart).set("dateEnd", dateEnd).set("type", type);
+        return this.http.get(`${this.path}/report/metrics/general/ranking/sellers`, { params, responseType: 'blob' });
+    }
+    getReportGeneral(dateStart, dateEnd, request) {
+        let params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]().set("dateStart", dateStart).set("dateEnd", dateEnd);
+        return this.http.post(`${this.path}/report/general/admin-sales`, Object.assign({}, request), { params, responseType: 'blob' });
     }
 }
 RoviandaApiService.ɵfac = function RoviandaApiService_Factory(t) { return new (t || RoviandaApiService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClient"])); };
@@ -424,11 +465,15 @@ const routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     {
         path: "login",
-        loadChildren: () => Promise.all(/*! import() | features-landing-landing-module */[__webpack_require__.e("default~features-home-home-module~features-landing-landing-module"), __webpack_require__.e("features-landing-landing-module")]).then(__webpack_require__.bind(null, /*! ./features/landing/landing.module */ "0duw")).then(m => m.LandingModule),
+        loadChildren: () => Promise.all(/*! import() | features-landing-landing-module */[__webpack_require__.e("default~features-home-home-module~features-landing-landing-module~features-warehouse-warehouse-module"), __webpack_require__.e("default~features-home-home-module~features-landing-landing-module"), __webpack_require__.e("features-landing-landing-module")]).then(__webpack_require__.bind(null, /*! ./features/landing/landing.module */ "0duw")).then(m => m.LandingModule),
     },
     {
         path: "home",
-        loadChildren: () => Promise.all(/*! import() | features-home-home-module */[__webpack_require__.e("default~features-home-home-module~features-landing-landing-module"), __webpack_require__.e("features-home-home-module")]).then(__webpack_require__.bind(null, /*! ./features/home/home.module */ "fOOd")).then(m => m.HomePageModule),
+        loadChildren: () => Promise.all(/*! import() | features-home-home-module */[__webpack_require__.e("default~features-home-home-module~features-landing-landing-module~features-warehouse-warehouse-module"), __webpack_require__.e("default~features-home-home-module~features-warehouse-warehouse-module"), __webpack_require__.e("default~features-home-home-module~features-landing-landing-module"), __webpack_require__.e("features-home-home-module")]).then(__webpack_require__.bind(null, /*! ./features/home/home.module */ "fOOd")).then(m => m.HomePageModule),
+    },
+    {
+        path: "warehouses",
+        loadChildren: () => Promise.all(/*! import() | features-warehouse-warehouse-module */[__webpack_require__.e("default~features-home-home-module~features-landing-landing-module~features-warehouse-warehouse-module"), __webpack_require__.e("default~features-home-home-module~features-warehouse-warehouse-module"), __webpack_require__.e("features-warehouse-warehouse-module")]).then(__webpack_require__.bind(null, /*! ./features/warehouse/warehouse.module */ "/Hob")).then(m => m.WarehouseModule)
     }
 ];
 class AppRoutingModule {

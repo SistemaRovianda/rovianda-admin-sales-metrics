@@ -44,7 +44,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "/* You can add global styles to this file, and also import other style files */\nhtml, body {\n  height: 100%;\n}\nbody {\n  margin: 0;\n  font-family: Roboto, \"Helvetica Neue\", sans-serif;\n}\nion-button.ion-color-primary {\n  background-color: #e2bd53;\n}", "",{"version":3,"sources":["webpack://src/styles.scss"],"names":[],"mappings":"AAAA,8EAAA;AAEA;EAAa,YAAA;AACb;AAAA;EAAO,SAAA;EAAW,iDAAA;AAKlB;AAHA;EACI,yBAAA;AAMJ","sourcesContent":["/* You can add global styles to this file, and also import other style files */\n\nhtml, body { height: 100%; }\nbody { margin: 0; font-family: Roboto, \"Helvetica Neue\", sans-serif; }\n\nion-button.ion-color-primary {\n    background-color: #e2bd53;\n  }\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "/* You can add global styles to this file, and also import other style files */\nhtml, body {\n  height: 100%;\n}\nbody {\n  margin: 0;\n  font-family: Roboto, \"Helvetica Neue\", sans-serif;\n}\nion-button.ion-color-primary {\n  background-color: #e2bd53;\n}", "",{"version":3,"sources":["webpack://src/styles.scss"],"names":[],"mappings":"AAAA,8EAAA;AAEA;EAAa,YAAA;AACb;AAAA;EAAO,SAAA;EAAW,iDAAA;AAKlB;AAHA;EACI,yBAAA;AAMJ","sourcesContent":["/* You can add global styles to this file, and also import other style files */\r\n\r\nhtml, body { height: 100%; }\r\nbody { margin: 0; font-family: Roboto, \"Helvetica Neue\", sans-serif; }\r\n\r\nion-button.ion-color-primary {\r\n    background-color: #e2bd53;\r\n  }\r\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -58,8 +58,8 @@ ___CSS_LOADER_EXPORT___.push([module.i, "/* You can add global styles to this fi
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/salvadorkano/Desktop/ToolSalesRovianda/ventas-metrics/node_modules/@angular/material/prebuilt-themes/indigo-pink.css */"8jWO");
-module.exports = __webpack_require__(/*! /Users/salvadorkano/Desktop/ToolSalesRovianda/ventas-metrics/src/styles.scss */"+EN/");
+__webpack_require__(/*! C:\Users\Ignacio\Desktop\Proyectos\Rovianda\rovianda-admin-metrics\node_modules\@angular\material\prebuilt-themes\indigo-pink.css */"8jWO");
+module.exports = __webpack_require__(/*! C:\Users\Ignacio\Desktop\Proyectos\Rovianda\rovianda-admin-metrics\src\styles.scss */"+EN/");
 
 
 /***/ }),

@@ -27,9 +27,9 @@ ul {
 }
 
 .card-amount,.card-sales{
-    width: max-content;
-    height: 100px;
-    float: left;
+    width: 170px;
+    height: 120px;
+    text-align: center;
     margin-left: 50px;
 }
 
@@ -41,6 +41,11 @@ ul {
     margin-top: 30px;
     margin-left: 5%;
     margin-right: 5%;
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 200px;
+    
 }
 .buttons-actions{
     float: right;

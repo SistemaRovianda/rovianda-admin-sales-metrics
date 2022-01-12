@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/salvadorkano/Desktop/ToolSalesRovianda/ventas-metrics/src/polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! C:\Users\Ignacio\Desktop\Proyectos\Rovianda\rovianda-admin-metrics\src\polyfills.ts */"hN/g");
 
 
 /***/ }),

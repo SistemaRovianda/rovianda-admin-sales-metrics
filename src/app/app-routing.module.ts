@@ -12,6 +12,10 @@ const routes: Routes = [
     path: "home",
     loadChildren: () =>
       import("./features/home/home.module").then(m => m.HomePageModule),
+  },
+  {
+    path: "warehouses",
+    loadChildren:()=> import("./features/warehouse/warehouse.module").then(m=>m.WarehouseModule)
   }
 ];
 

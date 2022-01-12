@@ -1,0 +1,66 @@
+.ranking-sellers-container{
+    width: 400px;
+    height: 650px;
+}
+.close-modal{
+    float: right;
+}
+.seller-ranking-item{
+    display: block;
+    background-color: #035b96;
+    color: white;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    border: solid .5px;
+}
+
+.seller-ranking-item-selected{
+    display: block;
+    background-color: #e9b832;
+    color: rgb(3, 3, 3);
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    border: solid .5px;
+}
+.quantity-container{
+    font-size: 12px;
+    float: right;
+}
+.name-container{
+    font-size: 10px;
+}
+.title{
+    display: block;
+    text-align: center;
+    font-size: 24px;
+}
+.sub-title-dates{
+    display: block;
+    text-align: center;
+}
+.sellers-ranking-container{
+    overflow-y: scroll;
+    height: 550px;
+}
+.transition-div{
+    background-color: blue;
+    width: 100px;
+    height: 100px;
+    animation-name: example;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+  }
+  
+  @keyframes example {
+    100%  {width: 400px;height: 550px;}
+  }
+
+  .button-download-report{
+    text-align: center;
+  }

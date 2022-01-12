@@ -2,7 +2,9 @@ import { HttpClient, HttpHandler, HttpHeaders, HttpParams } from '@angular/commo
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Client, ClientUpdateRequest, DayVisited } from 'src/app/Models/Client';
-import { SalesAcumulated } from 'src/app/Models/Sale.Model';
+import { ChartD3DataInterface, GeneralReportRequest, RankingSellerByProduct } from 'src/app/Models/Metrics';
+import { ProductInterface } from 'src/app/Models/Product.Interface';
+import { RankingSeller, SalesAcumulated } from 'src/app/Models/Sale.Model';
 import { SellerAcumulated } from 'src/app/Models/Seller.Model';
 import { Seller } from 'src/app/Models/User.Model';
 import { environment } from 'src/environments/environment';
@@ -63,9 +65,14 @@ export class RoviandaApiService{
         return this.http.get<Seller[]>(`${this.path}/admin-sales/sellers`);
     }
 
-    loadAcumulatedBySeller(sellerId:string,date:string){
-        let params:HttpParams = new HttpParams().set("date",date);
+    loadAcumulatedBySeller(sellerId:string,date:string,dateTo:string){
+        let params:HttpParams = new HttpParams().set("from",date).set("to",dateTo);
         return this.http.get<SellerAcumulated>(`${this.path}/get-status/sales/${sellerId}`,{params});
+    }
+
+    downloadSummary(sellerId:string,date:string,dateTo:string,type:string){
+        let params:HttpParams = new HttpParams().set("from",date).set("to",dateTo).set("type",type);
+        return this.http.get(`${this.path}/report/seller/summary/${sellerId}`,{params,responseType:"blob"});
     }
 
     getClientOfSeller(sellerId:string){
@@ -89,5 +96,51 @@ export class RoviandaApiService{
     }
     deleteLogicClient(clientId:number){
         return this.http.delete(`${this.path}/client-delete/`+clientId);
+    }
+    getAllClients(){
+        return this.http.get<Client[]>(`${this.path}/admin-sales/allclients`)
+    }
+
+    getAllProducts(){
+        return this.http.get<ProductInterface[]>(`${this.path}/admin-sales/allproducts`);
+    }
+
+    getChartGeneralSalesMetrics(dateStart:string,dateEnd:string){
+        let params = new HttpParams();
+        params = params.set("dateStart",dateStart);
+        params = params.set("dateEnd",dateEnd);
+        return this.http.get<ChartD3DataInterface[]>(`${this.path}/metrics/general/admin-sales`,{params});
+    }
+
+    getRankingSellersByProduct(presentationId:number,dateStart:string,dateEnd:string){
+        let params = new HttpParams().set("dateStart",dateStart).set("dateEnd",dateEnd);
+        return this.http.get<RankingSellerByProduct[]>(`${this.path}/metrics/general/rankin-sellers/`+presentationId,{params});
+    }
+    getRankingOfSellersByDate(dateStart:string,dateEnd:string){
+        let params = new HttpParams().set("dateStart",dateStart).set("dateEnd",dateEnd);
+        return this.http.get<RankingSeller[]>(`${this.path}/metrics/general/ranking/sellers`,{params});
+    }
+
+    getReportRankingOfProducts(dateStart:string,dateEnd:string,type:string){
+        let params = new HttpParams().set("dateStart",dateStart).set("dateEnd",dateEnd).set("type",type);
+        return this.http.get(`${this.path}/metrics/report/general/admin-sales`,{params,responseType:'blob'});
+    }
+
+    getReportRankingOfProductsByProduct(presentationId:number,dateStart:string,dateEnd:string,type:string){
+        let params = new HttpParams().set("dateStart",dateStart).set("dateEnd",dateEnd).set("type",type);
+        return this.http.get(`${this.path}/metrics/report/general/rankin-sellers/`+presentationId,{params,responseType:'blob'});
+    }
+
+    getReportRankingOfSellers(dateStart:string,dateEnd:string,type:string){
+        let params = new HttpParams().set("dateStart",dateStart).set("dateEnd",dateEnd).set("type",type);
+        
+        return this.http.get(`${this.path}/report/metrics/general/ranking/sellers`,{params,responseType:'blob'});
+    }
+
+    getReportGeneral(dateStart,dateEnd:string,request:GeneralReportRequest){
+        let params = new HttpParams().set("dateStart",dateStart).set("dateEnd",dateEnd);
+        return this.http.post(`${this.path}/report/general/admin-sales`,{
+            ...request
+        },{params,responseType:'blob'});
     }
 }

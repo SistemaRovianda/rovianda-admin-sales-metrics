@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"default~features-home-home-module~features-landing-landing-module":"default~features-home-home-module~features-landing-landing-module","features-home-home-module":"features-home-home-module","features-landing-landing-module":"features-landing-landing-module"}[chunkId]||chunkId) +    "-es5.js"
+/******/ 		return __webpack_require__.p + "" + ({"default~features-home-home-module~features-landing-landing-module~features-warehouse-warehouse-module":"default~features-home-home-module~features-landing-landing-module~features-warehouse-warehouse-module","default~features-home-home-module~features-landing-landing-module":"default~features-home-home-module~features-landing-landing-module","features-landing-landing-module":"features-landing-landing-module","default~features-home-home-module~features-warehouse-warehouse-module":"default~features-home-home-module~features-warehouse-warehouse-module","features-home-home-module":"features-home-home-module","features-warehouse-warehouse-module":"features-warehouse-warehouse-module"}[chunkId]||chunkId) +    "-es5.js"
 /******/ 	}
 /******/
 /******/ 	// The require function

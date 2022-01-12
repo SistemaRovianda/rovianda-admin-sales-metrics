@@ -30,7 +30,7 @@
         </mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
       </mat-form-field>
-      <button mat-stroked-button color="primary" (click)="table.searchByDate(from.value,to.value)">
+      <button mat-stroked-button color="primary" (click)="getAcumulatedbyDates()">
         <mat-icon>search</mat-icon>
     </button>
     </form>
@@ -39,19 +39,23 @@
     <!-- <button mat-stroked-button color="primary" (click)="confirm()">Guardar</button>
     <button mat-stroked-button color="warn" (click)="restore()">Revertir</button> -->
     
-    <button mat-stroked-button color="primary" (click)="table.search(null)">
+    <!---<button mat-stroked-button color="primary" (click)="table.search(null)">
         <mat-icon>autorenew</mat-icon>
-    </button>
+    </button>-->
 </div>
 <div>
-    <app-table-sales #table></app-table-sales>
+    <!-- <app-table-sales #table></app-table-sales> -->
+    <app-chart-sales #chart></app-chart-sales>
 </div>
 <div class="cards">
     <mat-card class="card-amount">
-    <h1>Venta total:</h1><br><h1 style="text-align: center;"> $ {{acumulated.total?acumulated.total:0}}</h1></mat-card>
-    <mat-card class="card-amount"><h1>Contado total:</h1><br><h1 style="text-align: center;"> $ {{acumulated.contado?acumulated.contado:0}}</h1></mat-card>
-    <mat-card class="card-amount"><h1>Crédito total:</h1><br><h1 style="text-align: center;"> $ {{acumulated.credito?acumulated.credito:0}}</h1></mat-card>
-    <mat-card class="card-amount"><h1>Cobranza total:</h1><br><h1 style="text-align: center;"> $ {{acumulated.cobranza?acumulated.cobranza:0}}</h1></mat-card>
+    <h1>Venta total:</h1><br><h1 style="text-align: center;"> $ {{acumulated.total?parseAmount(acumulated.total):0}}</h1></mat-card>
+    <mat-card class="card-amount"><h1>Contado total:</h1><br><h1 style="text-align: center;"> $ {{acumulated.contado?parseAmount(acumulated.contado):0}}</h1></mat-card>
+    <mat-card class="card-amount"><h1>Crédito total:</h1><br><h1 style="text-align: center;"> $ {{acumulated.credito?parseAmount(acumulated.credito):0}}</h1></mat-card>
+    <mat-card class="card-amount"><h1>Cobranza total:</h1><br><h1 style="text-align: center;"> $ {{acumulated.cobranza?parseAmount(acumulated.cobranza):0}}</h1></mat-card>
+    <mat-card class="card-amount"><h1>Total kilos: </h1><br><h1 style="text-align: center;"> $ {{acumulated.totalKg?parseAmount(acumulated.totalKg):0}}</h1></mat-card>
+    <mat-card class="card-amount" (click)="openListProductRank()"><h1>Producto más vendido: </h1><label style="text-align: center;display: block;">  {{productTop?productTop.name+" "+productTop.typePresentation:""}}</label></mat-card>
+    <mat-card class="card-amount" (click)="openListSellersRank()"><h1>Ranking de ventas: </h1><img src="assets/images/techblack.png" height="50px" width="50px"></mat-card>
     <!-- <mat-card class="card-sales" >
         <h1>Ventas removidas:</h1>
         <div style="text-align: center;">

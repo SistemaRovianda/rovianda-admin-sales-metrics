@@ -1,0 +1,14 @@
+<div class="ranking-sellers-container">
+    <mat-icon class="close-modal" (click)="closeModal()">close</mat-icon>
+    <label class="title">Ranking de Vendedores</label><br>
+    <label class="sub-title-dates">Desde: {{data.dateStart}} hasta: {{data.dateEnd}}</label><br>
+    <div  class="sellers-ranking-container">
+    <div *ngFor="let seller of rankingSellers; let index=index" [class]="seller.selected?'seller-ranking-item-selected':'seller-ranking-item'" (click)="select(index)">
+       <label class="name-container">{{seller.name}}</label>
+       <label class="quantity-container"> {{parseAmount(seller.amount)}} </label>
+    </div>
+    </div>
+    <div class="button-download-report" >
+        <button mat-button mat-raised-button color="default" (click)="showModalDownload()">{{selection==null?'Reporte general':'Reporte individual'}}</button>
+    </div>
+</div>

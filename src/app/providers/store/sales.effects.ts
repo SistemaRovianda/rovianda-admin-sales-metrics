@@ -41,7 +41,7 @@ export class SaleEffects{
         ofType(saleActions.getAcumulated),
         exhaustMap((action)=>this.roviandaApi.getAcumulated(action.dateFrom,action.dateTo).pipe(
             switchMap((res)=>[saleActions.setAcumulated(res)]),
-            catchError((err)=>[saleActions.setAcumulated({contado:"0",credito:"0",total:"0",cobranza:"0"})])
+            catchError((err)=>[saleActions.setAcumulated({contado:0,credito:0,total:0,cobranza:0,totalKg:0})])
         )))
     )
 

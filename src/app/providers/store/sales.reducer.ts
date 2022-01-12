@@ -15,10 +15,11 @@ export interface salesState{
     isDeletingSales:boolean,
     errorDeleting:string,
     acumulated:{
-        total:string,
-        contado:string,
-        credito:string,
-        cobranza:string
+        total:number,
+        contado:number,
+        credito:number,
+        cobranza:number,
+        totalKg:number
     }
 }
 
@@ -33,10 +34,11 @@ const initValue:salesState ={
     isDeletingSales:false,
     errorDeleting:null,
     acumulated:{
-        cobranza:"0",
-        contado:"0",
-        credito:"0",
-        total:"0"    
+        cobranza:0,
+        contado:0,
+        credito:0,
+        total:0,
+        totalKg:0
     }
 };
 

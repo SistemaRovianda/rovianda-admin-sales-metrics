@@ -29,7 +29,7 @@
     /***/
     function _(module, exports, __webpack_require__) {
       module.exports = __webpack_require__(
-      /*! /Users/salvadorkano/Desktop/ToolSalesRovianda/ventas-metrics/src/main.ts */
+      /*! C:\Users\Ignacio\Desktop\Proyectos\Rovianda\rovianda-admin-metrics\src\main.ts */
       "zUnb");
       /***/
     },
@@ -130,10 +130,11 @@
               return [_sales_actions__WEBPACK_IMPORTED_MODULE_3__["setAcumulated"](res)];
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (err) {
               return [_sales_actions__WEBPACK_IMPORTED_MODULE_3__["setAcumulated"]({
-                contado: "0",
-                credito: "0",
-                total: "0",
-                cobranza: "0"
+                contado: 0,
+                credito: 0,
+                total: 0,
+                cobranza: 0,
+                totalKg: 0
               })];
             }));
           }));
@@ -205,7 +206,7 @@
 
       var environment = {
         production: false,
-        basePath: "https://us-central1-sistema-rovianda.cloudfunctions.net/app/rovianda" //"https://us-central1-rovianda-88249.cloudfunctions.net/app/rovianda""http://localhost:5001/sistema-rovianda/us-central1/app/rovianda",//
+        basePath: "https://us-central1-sistema-rovianda.cloudfunctions.net/app/rovianda" //"https://us-central1-rovianda-88249.cloudfunctions.net/app/rovianda",//"http://localhost:5001/sistema-rovianda/us-central1/app/rovianda"//"http://localhost:5001/sistema-rovianda/us-central1/app/rovianda"//"http://localhost:5001/sistema-rovianda/us-central1/app/rovianda"//"http://localhost:5001/sistema-rovianda/us-central1/app/rovianda"//
 
       };
       /*
@@ -263,10 +264,11 @@
         isDeletingSales: false,
         errorDeleting: null,
         acumulated: {
-          cobranza: "0",
-          contado: "0",
-          credito: "0",
-          total: "0"
+          cobranza: 0,
+          contado: 0,
+          credito: 0,
+          total: 0,
+          totalKg: 0
         }
       };
       var saleReducer = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createReducer"])(initValue, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["on"])(_sales_actions__WEBPACK_IMPORTED_MODULE_1__["getAllSalesForSuperAdmin"], function (state) {
@@ -500,10 +502,19 @@
           }
         }, {
           key: "loadAcumulatedBySeller",
-          value: function loadAcumulatedBySeller(sellerId, date) {
-            var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]().set("date", date);
+          value: function loadAcumulatedBySeller(sellerId, date, dateTo) {
+            var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]().set("from", date).set("to", dateTo);
             return this.http.get("".concat(this.path, "/get-status/sales/").concat(sellerId), {
               params: params
+            });
+          }
+        }, {
+          key: "downloadSummary",
+          value: function downloadSummary(sellerId, date, dateTo, type) {
+            var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]().set("from", date).set("to", dateTo).set("type", type);
+            return this.http.get("".concat(this.path, "/report/seller/summary/").concat(sellerId), {
+              params: params,
+              responseType: "blob"
             });
           }
         }, {
@@ -535,6 +546,78 @@
           key: "deleteLogicClient",
           value: function deleteLogicClient(clientId) {
             return this.http["delete"]("".concat(this.path, "/client-delete/") + clientId);
+          }
+        }, {
+          key: "getAllClients",
+          value: function getAllClients() {
+            return this.http.get("".concat(this.path, "/admin-sales/allclients"));
+          }
+        }, {
+          key: "getAllProducts",
+          value: function getAllProducts() {
+            return this.http.get("".concat(this.path, "/admin-sales/allproducts"));
+          }
+        }, {
+          key: "getChartGeneralSalesMetrics",
+          value: function getChartGeneralSalesMetrics(dateStart, dateEnd) {
+            var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]();
+            params = params.set("dateStart", dateStart);
+            params = params.set("dateEnd", dateEnd);
+            return this.http.get("".concat(this.path, "/metrics/general/admin-sales"), {
+              params: params
+            });
+          }
+        }, {
+          key: "getRankingSellersByProduct",
+          value: function getRankingSellersByProduct(presentationId, dateStart, dateEnd) {
+            var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]().set("dateStart", dateStart).set("dateEnd", dateEnd);
+            return this.http.get("".concat(this.path, "/metrics/general/rankin-sellers/") + presentationId, {
+              params: params
+            });
+          }
+        }, {
+          key: "getRankingOfSellersByDate",
+          value: function getRankingOfSellersByDate(dateStart, dateEnd) {
+            var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]().set("dateStart", dateStart).set("dateEnd", dateEnd);
+            return this.http.get("".concat(this.path, "/metrics/general/ranking/sellers"), {
+              params: params
+            });
+          }
+        }, {
+          key: "getReportRankingOfProducts",
+          value: function getReportRankingOfProducts(dateStart, dateEnd, type) {
+            var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]().set("dateStart", dateStart).set("dateEnd", dateEnd).set("type", type);
+            return this.http.get("".concat(this.path, "/metrics/report/general/admin-sales"), {
+              params: params,
+              responseType: 'blob'
+            });
+          }
+        }, {
+          key: "getReportRankingOfProductsByProduct",
+          value: function getReportRankingOfProductsByProduct(presentationId, dateStart, dateEnd, type) {
+            var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]().set("dateStart", dateStart).set("dateEnd", dateEnd).set("type", type);
+            return this.http.get("".concat(this.path, "/metrics/report/general/rankin-sellers/") + presentationId, {
+              params: params,
+              responseType: 'blob'
+            });
+          }
+        }, {
+          key: "getReportRankingOfSellers",
+          value: function getReportRankingOfSellers(dateStart, dateEnd, type) {
+            var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]().set("dateStart", dateStart).set("dateEnd", dateEnd).set("type", type);
+            return this.http.get("".concat(this.path, "/report/metrics/general/ranking/sellers"), {
+              params: params,
+              responseType: 'blob'
+            });
+          }
+        }, {
+          key: "getReportGeneral",
+          value: function getReportGeneral(dateStart, dateEnd, request) {
+            var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]().set("dateStart", dateStart).set("dateEnd", dateEnd);
+            return this.http.post("".concat(this.path, "/report/general/admin-sales"), Object.assign({}, request), {
+              params: params,
+              responseType: 'blob'
+            });
           }
         }]);
 
@@ -932,7 +1015,7 @@
         loadChildren: function loadChildren() {
           return Promise.all(
           /*! import() | features-landing-landing-module */
-          [__webpack_require__.e("default~features-home-home-module~features-landing-landing-module"), __webpack_require__.e("features-landing-landing-module")]).then(__webpack_require__.bind(null,
+          [__webpack_require__.e("default~features-home-home-module~features-landing-landing-module~features-warehouse-warehouse-module"), __webpack_require__.e("default~features-home-home-module~features-landing-landing-module"), __webpack_require__.e("features-landing-landing-module")]).then(__webpack_require__.bind(null,
           /*! ./features/landing/landing.module */
           "0duw")).then(function (m) {
             return m.LandingModule;
@@ -943,10 +1026,21 @@
         loadChildren: function loadChildren() {
           return Promise.all(
           /*! import() | features-home-home-module */
-          [__webpack_require__.e("default~features-home-home-module~features-landing-landing-module"), __webpack_require__.e("features-home-home-module")]).then(__webpack_require__.bind(null,
+          [__webpack_require__.e("default~features-home-home-module~features-landing-landing-module~features-warehouse-warehouse-module"), __webpack_require__.e("default~features-home-home-module~features-warehouse-warehouse-module"), __webpack_require__.e("default~features-home-home-module~features-landing-landing-module"), __webpack_require__.e("features-home-home-module")]).then(__webpack_require__.bind(null,
           /*! ./features/home/home.module */
           "fOOd")).then(function (m) {
             return m.HomePageModule;
+          });
+        }
+      }, {
+        path: "warehouses",
+        loadChildren: function loadChildren() {
+          return Promise.all(
+          /*! import() | features-warehouse-warehouse-module */
+          [__webpack_require__.e("default~features-home-home-module~features-landing-landing-module~features-warehouse-warehouse-module"), __webpack_require__.e("default~features-home-home-module~features-warehouse-warehouse-module"), __webpack_require__.e("features-warehouse-warehouse-module")]).then(__webpack_require__.bind(null,
+          /*! ./features/warehouse/warehouse.module */
+          "/Hob")).then(function (m) {
+            return m.WarehouseModule;
           });
         }
       }];

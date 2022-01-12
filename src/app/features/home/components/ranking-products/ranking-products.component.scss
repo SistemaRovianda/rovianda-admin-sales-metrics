@@ -1,0 +1,105 @@
+.ranking-products-container{
+    width: 400px;
+    height: 650px;
+}
+.products-ranking-container{
+    overflow-y: scroll;
+    height: 550px;
+}
+.product-ranking-item{
+    display: block;
+    background-color: #EEC663;
+    color: black;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    border: solid .5px;
+}
+.amount-container{
+   
+    font-size: 12px;
+}
+.quantity-container{
+    font-size: 12px;
+}
+.name-container{
+    float: right;
+    font-size: 10px;
+}
+.title{
+    display: block;
+    text-align: center;
+    font-size: 24px;
+}
+.sub-title-dates{
+    display: block;
+    text-align: center;
+}
+.product-selected{
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.spinner-ranking-sellers-product{
+    margin-left: 50%;
+}
+
+.ranking-sellers-item-container{
+    background-color: #EEC663;
+    display: block;
+    width: 383px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    color: black;
+}
+.ranking-sellers-item-container-sub-item{
+    float: right;
+}
+.product-selected-ranking{
+    height: 400px;
+    width: max-content;
+    min-width: 400px;
+    overflow-y: scroll;
+}
+.card-total-weight{
+    width: 150px;
+    height: 100px;
+    text-align: center;
+    float: left;
+}
+.card-total-bill{
+    width: 150px;
+    height: 100px;
+    text-align: center;
+    float: right;
+}
+.card-total-weight>img{
+    height: 75px;
+    width: 75px;
+    filter:drop-shadow(2px 2px 5px gold);
+}
+.card-total-bill>img{
+    height: 75px;
+    width: 75px;
+    filter:drop-shadow(2px 2px 5px gold);
+}
+.card-total-weight>label{
+    display: block;
+    text-align: center;
+}
+.card-total-bill>label{
+    display: block;
+    text-align: center;
+}
+.close-modal{
+    float: right;
+}
+.report-products-solded-ranking{
+    text-align: center;
+}

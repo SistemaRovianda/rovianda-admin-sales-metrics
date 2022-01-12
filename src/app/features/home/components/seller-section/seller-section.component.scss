@@ -30,14 +30,22 @@
     width: 25%;
     background-color: rgb(205, 201, 201);
     overflow-y: scroll;
-    float: left
+    float: right;
+    
+}
+.list-sellers>ul{
+    list-style-type: none;
+    text-align: left;
 }
 .list-clients{
     height: 200px;
     width: 25%;
     background-color: rgb(205, 201, 201);
-    overflow-y: scroll;
-    
+    overflow-y: scroll;   
+}
+.list-clients>ul{
+    list-style-type: none;
+    text-align: left;
 }
 .list-products{
     height: 200px;
@@ -45,6 +53,10 @@
     overflow-y: scroll;
     width: 25%;
     
+}
+.list-products>ul{
+    list-style-type: none;
+    text-align: left;
 }
 .sellers-container{
     height: 400px;

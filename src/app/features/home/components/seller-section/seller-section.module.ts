@@ -15,6 +15,9 @@ import { ListClientsSellerModule } from '../list-clients-seller/list-clients-sel
 import { ListClientsSellerComponent } from '../list-clients-seller/list-clients-seller.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
+import { ListAllClientsModule } from '../list-all-clients/list-all-clients.module';
+import { ListAllClientsComponent } from '../list-all-clients/list-all-clients.component';
+import { FormatReportDialogModule } from '../format-report-dialog/format-report-dialog.module';
 @NgModule({
   declarations: [SellerSectionComponent],
   imports: [
@@ -31,10 +34,12 @@ import {MatIconModule} from '@angular/material/icon';
     MatDividerModule,
     ListClientsSellerModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    ListAllClientsModule,
+    FormatReportDialogModule
   ],
   exports:[SellerSectionComponent],
   providers:[{provide:MAT_DATE_LOCALE,useValue:"es-mx"}],
-  entryComponents:[ListClientsSellerComponent]
+  entryComponents:[ListClientsSellerComponent,ListAllClientsComponent]
 })
 export class SellerSectionModule { }

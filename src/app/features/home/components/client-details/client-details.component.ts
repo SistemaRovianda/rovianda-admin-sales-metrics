@@ -1,9 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Client, ClientUpdateRequest, DayVisited } from 'src/app/Models/Client';
 import { RoviandaApiService } from 'src/app/providers/services/Rovianda.Api.Service';
+import { ChangeClientSellerComponent } from '../change-client-seller/change-client-seller.component';
+import { ConfirmChangeComponent } from '../confirm-change/confirm-change.component';
 
 @Component({
   selector: 'app-client-details',
@@ -13,7 +15,7 @@ import { RoviandaApiService } from 'src/app/providers/services/Rovianda.Api.Serv
 export class ClientDetailsComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data:{client:Client,sellerId:string,register:boolean},private dialog:MatDialogRef<ClientDetailsComponent>,
-  private roviandaApiService:RoviandaApiService) { }
+  private roviandaApiService:RoviandaApiService,private matDialogOpen:MatDialog) { }
   form:FormGroup;
   isEditing:boolean=false;
   isLoading:boolean=false;
@@ -219,12 +221,27 @@ export class ClientDetailsComponent implements OnInit {
   }
 
   deleteClient(){
-    this.isLoading=true;
-    this.roviandaApiService.deleteLogicClient(this.data.client.id).subscribe(()=>{
-      this.isLoading=false;
-      this.close();
-    },()=>{
-      this.isLoading=false;
+    this.matDialogOpen.open(ConfirmChangeComponent,{data:{msg:"¿Está seguro que desea eliminar el cliente?"}}).afterClosed().subscribe((result)=>{
+      if(result){
+        this.isLoading=true;
+        this.roviandaApiService.deleteLogicClient(this.data.client.id).subscribe(()=>{
+          this.isLoading=false;
+          this.close();
+        },()=>{
+          this.isLoading=false;
+        });
+      }
+    });
+    
+  }
+  changeSeller(){
+    this.matDialogOpen.open(ChangeClientSellerComponent,{
+      data:{
+        client: this.data.client,
+        currentSellerUid: this.data.sellerId
+      }
+    }).afterClosed().subscribe(()=>{
+      this.dialog.close();
     });
   }
 }

@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="header">
+        <mat-icon class="close-modal" (click)="closeModal()">close</mat-icon>
+    </div>
+    <div class="titles" [formGroup]="form">
+        <label>Ruta de {{sellerName}}</label><br>
+        <label>Fecha: {{currentDate}} <mat-icon (click)="picker.open()">edit</mat-icon> <input matInput [matDatepicker]="picker" class="invisible" formControlName="date">
+            <mat-datepicker #picker></mat-datepicker>  </label>
+    </div>
+    <div class="map-container">
+        <agm-map class="map" [latitude]="lat" [longitude]="lng" [zoom]="14">
+            <agm-marker *ngFor="let visit of visited"  [latitude]="visit.latitude" [longitude]="visit.longitude" [iconUrl]="iconGreen" [label]="{color:'black',fontSize:'20px',text: visit.clientName}">
+                <agm-info-window [disableAutoPan]="true">
+                    Cliente: {{visit.clientName}}<br>
+                    Monto Vendido: $ {{visit.amount}}
+               </agm-info-window>
+            </agm-marker>
+            <agm-marker *ngFor="let visit of visitedWithoutSales"  [latitude]="visit.latitude" [longitude]="visit.longitude" [iconUrl]="iconRed"  [label]="{color:'black',fontWeight:'bold',fontSize:'20px',text: visit.clientName}">
+                <agm-info-window [disableAutoPan]="true">
+                    Cliente: {{visit.clientName}}<br>
+                    Monto Vendido: $ {{visit.amount}}
+               </agm-info-window>
+            </agm-marker>
+        </agm-map>
+    </div>
+    <div class="spinner-container">
+        <mat-spinner [diameter]="50" *ngIf="isLoading" style="margin-left: 50%;"></mat-spinner>
+    </div>
+    <div class="box-containers">
+        <div class="visited">
+            <label>Visitados</label>
+            <ul>
+                <li *ngFor="let visited of allVisitedWithSale">{{visited.clientName}}</li>
+            </ul>      
+        </div>
+        <div class="visitedWithoutSales">
+            <label>Visitados sin venta</label>
+            <ul>
+                <li *ngFor="let visited of allVisitedWithoutSales">
+                    <label style="color:black">Cliente:</label>{{visited.clientName}} <br>
+                    <label style="color:black">Observaciones:</label> {{visited.observations}} 
+                </li>
+            </ul>      
+        </div>
+    </div>
+    <div class="button-report">
+        <button mat-raised-button color="primary" (click)="getReportVisits()" [disabled]="isLoading">Reporte</button>
+    </div>
+</div>

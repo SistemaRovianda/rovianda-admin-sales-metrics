@@ -200,4 +200,8 @@ export class HomeComponent implements OnInit {
    parseAmount(number:number){
     return number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
   }
+
+  loadSellersReportsSection(){
+    this.router.navigateByUrl("sellers/reports")
+  }
 }

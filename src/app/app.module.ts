@@ -10,12 +10,16 @@ import { saleReducer } from './providers/store/sales.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { SaleEffects } from './providers/store/sales.effects';
 import { RoviandaApiService } from './providers/services/Rovianda.Api.Service';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCAOqn7u_ipjPAMAcDCcltTD_Aw2_rltPM'
+    }),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

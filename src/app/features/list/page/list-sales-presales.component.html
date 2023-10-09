@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="btn-group buttons-sales-presales" role="group" aria-label="Basic example">
+        <button type="button" [class]="(section=='SALES')?'btn btn-primary':'btn btn-outline-primary'"
+            (click)="selectSales()">Ventas</button>
+        <button type="button" [class]="(section=='PRESALES')?'btn btn-primary':'btn btn-outline-primary'"
+            (click)="selectPreSales()">Preventas</button>
+    </div>
+    <form [formGroup]="form">
+        <mat-form-field appearance="fill">
+            <mat-label>Folio</mat-label>
+            <input matInput formControlName="folio">
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Desde</mat-label>
+            <input matInput [matDatepicker]="from" formControlName="date">
+            <mat-datepicker-toggle matSuffix [for]="from">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #from></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Hasta</mat-label>
+          <input matInput [matDatepicker]="to" formControlName="dateTo">
+          <mat-datepicker-toggle matSuffix [for]="to">
+              <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #to></mat-datepicker>
+      </mat-form-field>
+        <button class="btn btn-primary button-search" (click)="search()">Buscar</button>
+    </form>
+    
+    <app-list-sales *ngIf="section=='SALES'" [_sales]="listSales" [_totalCount]="totalCount" (_saleDetails)="showSaleDetails($event)"></app-list-sales>
+    <app-list-presales *ngIf="section=='PRESALES'" [_presales]="listPreSales" [_totalCount]="totalCount" (_preSaleDetails)="showPreSaleDetails($event)"></app-list-presales>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <div class="page-link"aria-label="Previous" (click)="paginateToStart()">
+              <span aria-hidden="true">&laquo;</span>
+            </div>
+          </li>
+          <li class="page-item" *ngFor="let pageItem of pages"><div [class]="pageItem.selected?'page-link active':'page-link'" (click)="paginate(pageItem)">{{pageItem.page}}</div></li>
+          
+          <li class="page-item">
+            <div class="page-link" aria-label="Next" (click)="paginateToEnd()">
+              <span aria-hidden="true">&raquo;</span>
+            </div>
+          </li>
+        </ul>
+    </nav>
+</div>
+<div class="container" [formGroup]="formReport">
+  <div class="form-row align-items-center">
+      <div class="form-group col-auto" *ngIf="section=='SALES'">
+        <label for="type-report">Reportes: </label>
+        <select class="form-select" id="type-report" formControlName="typeReport">
+          <option value="DETAILS_SALES">Detalle de Ventas por día</option>
+          <option value="EFFECTIVE_ORDER_DELIVER">Efectividad Pedido-Entrega</option>
+          <option value="VISITS">Cumplimiento Visitas</option>
+        </select>
+      </div>
+      <div class="form-group col-auto" *ngIf="section=='PRESALES'">
+        <label for="type-report">Reportes: </label>
+        <select class="form-select" id="type-report" formControlName="typeReport">
+          <option value="DETAILS_SALES">Detalle de Venta por dia</option>
+          <option value="DAILY_SALE">Venta diaria por cliente</option>
+          <option value="EFFECTIVE_ORDER_DELIVER">Efectividad Pedido-Entrega</option>
+        </select>
+      </div>
+      <div class="align-items-center">
+        <button type="button" class="btn btn-primary" (click)="getPdf()">PDF</button>
+      </div>
+      <div class="form-group col-auto">
+        <button type="button" class="btn btn-success" (click)="getExcel()">EXCEL</button>
+      </div>
+      <div class="form-group col-auto">
+        <div class="spinner-border" role="status" *ngIf="isDownloading">
+          <span class="sr-only"></span>
+        </div>
+      </div>
+      
+  </div>
+</div>

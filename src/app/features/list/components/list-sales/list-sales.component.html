@@ -1,0 +1,25 @@
+<div class="container">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Folio</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Vendedor</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Monto</th>
+        <th scope="col">Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of listSales" scope="row">
+            <td>{{item.folio}}</td>
+            <td>{{item.typeSale}}</td>
+            <td>{{item.seller.name}}</td>
+            <td>{{item.date}}</td>
+            <td>{{item.amount}}</td>
+            <td><button type="button" class="btn btn-primary" (click)="showSaleDetails(item.saleId)">Ver</button></td>
+        </tr>
+    </tbody>
+  </table>
+
+</div>

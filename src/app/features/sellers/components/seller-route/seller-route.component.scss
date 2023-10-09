@@ -1,0 +1,58 @@
+.container{
+    height: 600px;
+    width: 1000px;
+}
+.map {
+    height: 400px;
+    width: 800px;
+  }
+  .close-modal{
+    float: right;
+}
+
+.map-container{
+    margin-left: 100px;;
+}
+.header{
+    display: flow-root;
+}
+
+.titles{
+    text-align: center;
+}
+
+.box-containers{
+    margin-top: 50px;
+    margin-left: 100px;
+    height: 200px;
+    width: 800px;
+    display: block;
+}
+
+.visited{
+    text-align: center;
+    border:1px solid black;
+    display: inline-block;
+    width: 350px;
+    height: 200px;
+    overflow-y: scroll;
+    color: green;
+}
+
+.visitedWithoutSales{
+    color: red;
+    text-align: center;
+    border:1px solid black;
+    display: inline-block;
+    margin-left: 100px;
+    width: 350px;
+    height: 200px;
+    overflow-y: scroll;
+}
+
+ul{
+    list-style: decimal;
+}
+.button-report{
+    text-align: center;
+}

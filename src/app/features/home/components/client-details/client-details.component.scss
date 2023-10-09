@@ -10,3 +10,22 @@
     display: flex;
     justify-content: center;
 }
+
+.mat-form-field{
+    font-size: 17px;
+    width: 280px;
+    &.mat-focused{
+        font-size: 20px;
+    }
+    .mat-input-element{
+        width: 100%;
+        font-size: 14px;
+    }
+    &::placeholder{
+        font-size: 14px;
+    }
+ }
+
+.mat-form-field-should-float {    
+  font-size: 20px;
+}

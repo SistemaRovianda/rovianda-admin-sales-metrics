@@ -69,6 +69,9 @@
       <button mat-raised-button [disabled]="!isEditing || isLoading" (click)="updateClient()" *ngIf="!data.register">Actualizar</button>
       <button mat-raised-button   (click)="register()" *ngIf="data.register" [disabled]="isLoading" >Registrar</button>
       <button mat-raised-button [disabled]="isEditing || isLoading" (click)="deleteClient()" *ngIf="!data.register">Eliminar</button>
+      <button mat-raised-button [disabled]="isEditing || isLoading" (click)="changeSeller()" *ngIf="!data.register" title="Cambiar vendedor">
+        <mat-icon>social_distance</mat-icon>  
+      </button>
       <button mat-raised-button color="warn" [disabled]="isLoading" (click)="close()">Cerrar</button>
       <br>
       <div class="updating-client" *ngIf="isLoading">

@@ -100,6 +100,7 @@ export class ListAllClientsComponent implements OnInit {
   }
   removeSelect(index:number){
     this.clientsListTemp[index].isSelected=false;
+    this.isSelectedAll=false;
     let id = this.clientsListTemp[index].id;
     for(let client of this.clientsList){
       if(client.id==id){

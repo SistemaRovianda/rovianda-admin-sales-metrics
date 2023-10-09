@@ -15,7 +15,7 @@ export class LayoutComponent implements OnInit {
   
   ngOnInit() {
     if(localStorage.getItem("username")!=null){
-      this.router.navigate(["home"]);
+      this.router.navigateByUrl("/dashboard");
     }
   }
 
@@ -31,9 +31,9 @@ export class LayoutComponent implements OnInit {
           this.firebaseService.getUserData(uid).subscribe((details)=>{
             if(details){
               console.log(JSON.stringify(details));
-              if(details.rol=="ADMIN_SALES"){
+              if(details.rol=="ADMIN_SALES" || details.rol=="ADMINISTRATOR"){
                 localStorage.setItem("username",details.name);
-                this.router.navigate(["home"]);
+                this.router.navigateByUrl("/dashboard");
               }else{
                 console.log("Rol no valido");
               }

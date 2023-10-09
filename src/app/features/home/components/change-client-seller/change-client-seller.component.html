@@ -1,0 +1,16 @@
+<h3>Traspaso de clientes</h3>
+<form [formGroup]="form">
+<mat-form-field appearance="fill">
+    <mat-label>Selecciona el vendedor a asignar</mat-label>
+    <mat-select formControlName="sellerUid">
+      <mat-option *ngFor="let seller of sellers" [value]="seller.uid">
+        {{seller.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  </form>
+<button mat-raised-button (click)="confirmChange()" [disabled]="modified">Intercambiar</button><br>
+<mat-spinner [diameter]="50" *ngIf="isLoading"></mat-spinner>
+<label *ngIf="modified">Intercambio efectuado</label><br>
+<button mat-raised-button color="warn" (click)="close()" *ngIf="modified">Cerrar</button>
+  

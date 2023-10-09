@@ -26,3 +26,10 @@ export interface Seller{
     status: string,
     cve: string
 }
+
+export interface SellerSelected{
+    name:string,
+    id:string,
+    isSelected:boolean,
+    key:number
+}

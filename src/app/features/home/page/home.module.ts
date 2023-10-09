@@ -14,7 +14,6 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
-import { SellerSectionModule } from '../components/seller-section/seller-section.module';
 import { ChartSalesModule } from '../components/chart-sales/chart-sales.module';
 import { RankingProductsModule } from '../components/ranking-products/ranking-products.module';
 import { RankingProductsComponent } from '../components/ranking-products/ranking-products.component';
@@ -28,11 +27,10 @@ import { SellersRankingModule } from '../components/sellers-ranking/sellers-rank
     MatInputModule,
     FormsModule,
     MatNativeDateModule,
-    SellerSectionModule,
     ChartSalesModule,
     RankingProductsModule,
     SellersRankingModule
-  ],exports:[HomeComponent,ModalListSalesTakedComponent,ModalConfirmRemoveComponent,RankingProductsComponent],
+  ],exports:[HomeComponent],
   providers:[MatDatepickerModule,MatNativeDateModule,{provide: MAT_DATE_LOCALE,useValue:"es-mx"}]
 })
 export class HomeModule { }

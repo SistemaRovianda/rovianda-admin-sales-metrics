@@ -1,0 +1,158 @@
+<div class="container-page">
+    <div class="container-choiser">
+        <h3>Selecciona el tipo de reporte</h3>
+        <select class="form-select" aria-label="Default select example" [(ngModel)]="selection">
+            <option value="1">Reporte de agenda de vendedor</option>
+            <option value="2">Reporte de visitas</option>
+            <option value="3">Reporte de crecimiento</option>
+        </select>
+    </div>
+    <div class="toIncrease" *ngIf="selection==1">
+        <div class="form-sellers">
+            <div class="button-container">
+                <button type="button" class="btn btn-primary button-add-seller" (click)="openDialogSellers()">Agregar
+                    vendedor</button>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="showAlert">
+                Debes seleccionar al menos a un vendedor
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Listado de vendedores</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let seller of sellersSelected">{{seller.name}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="listDays">
+                <label class="daysSectionTitle">Dias</label>
+                <select class="form-select" aria-label="Default select example" [(ngModel)]="day">
+                    <option value="MONDAY" selected>Lunes</option>
+                    <option value="TUESDAY">Martes</option>
+                    <option value="WEDNESDAY">Miercoles</option>
+                    <option value="THURSDAY">Jueves</option>
+                    <option value="FRIDAY">Viernes</option>
+                    <option value="SATURDAY">Sabado</option>
+                    <option value="ALL">Todos</option>
+                </select>
+            </div>
+            <div class="button-container">
+                <button type="button" class="btn btn-light" (click)="downloadReportVisits()"
+                    *ngIf="!isLoading">Descargar</button>
+                <div class="spinner-border" role="status" *ngIf="isLoading">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="toIncrease" *ngIf="selection==2">
+        <div class="form-sellers">
+            <div class="button-container">
+                <button type="button" class="btn btn-primary button-add-seller" (click)="openDialogSellers()">Agregar
+                    vendedor</button>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="showAlert">
+                Debes seleccionar al menos a un vendedor
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Listado de vendedores</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let seller of sellersSelected">{{seller.name}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="datepicker">
+                <form [formGroup]="form">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Fecha de busqueda</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="to">
+                        <mat-datepicker-toggle matSuffix [for]="picker">
+                            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </form>
+            </div>
+            <div class="button-container">
+                <button type="button" class="btn btn-light" (click)="downloadReportVisits()"
+                    *ngIf="!isLoading">Descargar</button>
+                <div class="spinner-border" role="status" *ngIf="isLoading">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="toVisits" *ngIf="selection==3">
+        <div class="form-sellers">
+            <div class="button-container">
+                <button type="button" class="btn btn-primary button-add-seller" (click)="openDialogSellers()">Agregar
+                    vendedor</button>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="showAlert">
+                Debes seleccionar al menos a un vendedor
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Listado de vendedores</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let seller of sellersSelected">{{seller.name}}</li>
+                    </ul>
+                </div>
+            </div>
+         
+            <div class="container-choiser">
+                <h3>Selecciona el periodo</h3>
+                <div class="container-period">
+                    <div class="Oldyear-picker">
+                        <label>Año anterior</label>
+                        <select class="form-select" aria-label="Default select example" [(ngModel)]="oldYear">
+                            <option *ngFor="let year of validYears" [value]="year">{{year}}</option>
+                        </select>
+                    </div>
+                    <div class="newYear-picker">
+                        <label>Año a comparar (Más reciente)</label>
+                        <select class="form-select" aria-label="Default select example" [(ngModel)]="newYear">
+                            <option *ngFor="let year of validYears" [value]="year">{{year}}</option>
+                        </select>
+                    </div>
+                    <div class="month-picker">
+                        <label>Mes</label>
+                        <select class="form-select" aria-label="Default select example" [(ngModel)]="month">
+                            <option value="1">Enero</option>
+                            <option value="2">Febrero</option>
+                            <option value="3">Marzo</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Mayo</option>
+                            <option value="6">Junio</option>
+                            <option value="7">Julio</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
+                    </div>
+                    <div class="period-picker">
+                        <label>Quincena</label>
+                        <select class="form-select" aria-label="Default select example" [(ngModel)]="period">
+                            <option value="1">1ra quincena</option>
+                            <option value="2">2da quincena</option>
+                            <option value="3">Mes completo</option>
+                        </select>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="button-container">
+                <button type="button" class="btn btn-light" (click)="downloadReportVisits()"
+                    *ngIf="!isLoading">Descargar</button>
+                <div class="spinner-border" role="status" *ngIf="isLoading">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

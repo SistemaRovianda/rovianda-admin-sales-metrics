@@ -1,6 +1,7 @@
 import { HttpClient, HttpHandler, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ClientVisitData } from 'src/app/features/sellers/models/SellerVisits';
 import { Client, ClientUpdateRequest, DayVisited } from 'src/app/Models/Client';
 import { ChartD3DataInterface, GeneralReportRequest, RankingSellerByProduct } from 'src/app/Models/Metrics';
 import { ProductInterface } from 'src/app/Models/Product.Interface';
@@ -32,6 +33,31 @@ export class RoviandaApiService{
         return this.http.post(`${this.path}/sales-superadmin/sales`,{sales:saleIds},{params:parameters,observe:"response"});
     }
 
+    getAllSalesByForViews(page:number,peerPage:number,date:string,dateTo:string,folio:string){
+        let parameters:HttpParams= new HttpParams();
+        parameters= parameters.set("page",page.toString());
+        parameters=parameters.set("peerPage",peerPage.toString());
+        parameters=parameters.set("date",date);
+        parameters=parameters.set("dateTo",dateTo);
+        if(folio!=null){
+        parameters=parameters.set("hint",folio);
+        }
+        
+        return this.http.post(`${this.path}/sales-superadmin/sales`,{sales:[]},{params:parameters,observe:"response"});
+    }
+
+    getAllPreSalesByForViews(page:number,peerPage:number,date:string,dateTo:string,folio:string){
+        let parameters:HttpParams= new HttpParams();
+        parameters= parameters.set("page",page.toString());
+        parameters=parameters.set("peerPage",peerPage.toString());
+        parameters=parameters.set("date",date);
+        parameters=parameters.set("dateTo",dateTo);
+        if(folio!=null){
+        parameters=parameters.set("hint",folio);
+        }
+        
+        return this.http.post(`${this.path}/sales-superadmin/presales`,{sales:[]},{params:parameters,observe:"response"});
+    }
     getTicket(saleId:number){
         let httpOptions:Object={
         headers:new HttpHeaders({
@@ -40,6 +66,16 @@ export class RoviandaApiService{
         responseType:'text'
         }
         return this.http.get(`${this.path}/sale-ticket/${saleId}`,httpOptions);
+    }
+
+    getPreSaleTicket(saleId:number){
+        let httpOptions:Object={
+        headers:new HttpHeaders({
+            'Content-Type':'application/json'
+        }),
+        responseType:'text'
+        }
+        return this.http.get(`${this.path}/presale-ticket/${saleId}`,httpOptions);
     }
 
     delSalesOfSystem(salesIds:Array<number>,date:string){
@@ -63,6 +99,10 @@ export class RoviandaApiService{
 
     getAllSellers(){
         return this.http.get<Seller[]>(`${this.path}/admin-sales/sellers`);
+    }
+
+    customerReassign(clientId:number,sellerUid:string){
+        return this.http.put(`${this.path}/customer/reassign`,{clientId,sellerUid});
     }
 
     loadAcumulatedBySeller(sellerId:string,date:string,dateTo:string){
@@ -142,5 +182,46 @@ export class RoviandaApiService{
         return this.http.post(`${this.path}/report/general/admin-sales`,{
             ...request
         },{params,responseType:'blob'});
+    }
+
+    downloadVisits(sellersIds:string[],date:string){
+        return this.http.post(`${this.path}/report/visits`,{sellersIds,date},{responseType:"blob"});
+    }
+    downloadIncreasing(sellersIds:string[],month:number,year:number,oldYear:number,typePeriod:number){
+        return this.http.post(`${this.path}/report/sold-period`,{sellersIds,month,year,oldYear,typePeriod},{responseType:"blob"});
+    }
+
+    downloadScheduleReport(sellersIds:string[],day:string){
+        return this.http.post(`${this.path}/report/customer-schedule`,{sellersIds,day},{responseType:"blob"});
+    }
+
+
+    getVisits(sellerId:string,date:string){
+        return this.http.post<ClientVisitData[]>(`${this.path}/customer/visits`,{sellerId,date});
+    }
+
+    getVisitsReport(sellerId:string,date:string){
+        return this.http.post(`${this.path}/customer/visits-report`,{sellerId,date},{responseType:"blob"});
+    }
+
+    getDailyPreSales(folio:string,dateStart:string,dateEnd:string,format:string){
+        let params = new HttpParams().set("format",format);
+        return this.http.post(`${this.path}/daily-sale/presales/report`,{folio,dateStart,dateEnd},{params,responseType:"blob"});
+    }
+    getDailySalesDetails(folio:string,dateStart:string,dateEnd:string,format:string){
+        let params = new HttpParams().set("format",format);
+        return this.http.post(`${this.path}/daily-sale/details/sales/report`,{folio,dateStart,dateEnd},{params,responseType:"blob"});
+    }
+    getDailyPreSalesDetails(folio:string,dateStart:string,dateEnd:string,format:string){
+        let params = new HttpParams().set("format",format);
+        return this.http.post(`${this.path}/daily-sale/details/presales/report`,{folio,dateStart,dateEnd},{params,responseType:"blob"});
+    }
+    getEffectiveDeliverReport(folio:string,dateStart:string,dateEnd:string,format:string){
+        let params = new HttpParams().set("format",format);
+        return this.http.post(`${this.path}/effective-delivery/presales/report`,{folio,dateStart,dateEnd},{params,responseType:"blob"});
+    }
+    getVisitsDailyReport(dateStart:string,dateEnd:string,format:string){
+        let params = new HttpParams().set("format",format);
+        return this.http.post(`${this.path}/visits-aday/sellers/report`,{dateStart,dateEnd},{params,responseType:"blob"});
     }
 }

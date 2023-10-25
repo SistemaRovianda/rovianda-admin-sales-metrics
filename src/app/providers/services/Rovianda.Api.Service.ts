@@ -16,6 +16,7 @@ import { environment } from 'src/environments/environment';
 export class RoviandaApiService{
 
     path:string = environment.basePath;
+    pathAltern:string = "http://rovianda.ddns.net:3000/rovianda"
     constructor(private http:HttpClient){
     }
 
@@ -206,22 +207,22 @@ export class RoviandaApiService{
 
     getDailyPreSales(folio:string,dateStart:string,dateEnd:string,format:string){
         let params = new HttpParams().set("format",format);
-        return this.http.post(`${this.path}/daily-sale/presales/report`,{folio,dateStart,dateEnd},{params,responseType:"blob"});
+        return this.http.post(`${this.pathAltern}/daily-sale/presales/report`,{folio,dateStart,dateEnd},{params,responseType:"blob"});
     }
     getDailySalesDetails(folio:string,dateStart:string,dateEnd:string,format:string){
         let params = new HttpParams().set("format",format);
-        return this.http.post(`${this.path}/daily-sale/details/sales/report`,{folio,dateStart,dateEnd},{params,responseType:"blob"});
+        return this.http.post(`${this.pathAltern}/daily-sale/details/sales/report`,{folio,dateStart,dateEnd},{params,responseType:"blob"});
     }
     getDailyPreSalesDetails(folio:string,dateStart:string,dateEnd:string,format:string){
         let params = new HttpParams().set("format",format);
-        return this.http.post(`${this.path}/daily-sale/details/presales/report`,{folio,dateStart,dateEnd},{params,responseType:"blob"});
+        return this.http.post(`${this.pathAltern}/daily-sale/details/presales/report`,{folio,dateStart,dateEnd},{params,responseType:"blob"});
     }
     getEffectiveDeliverReport(folio:string,dateStart:string,dateEnd:string,format:string){
         let params = new HttpParams().set("format",format);
-        return this.http.post(`${this.path}/effective-delivery/presales/report`,{folio,dateStart,dateEnd},{params,responseType:"blob"});
+        return this.http.post(`${this.pathAltern}/effective-delivery/presales/report`,{folio,dateStart,dateEnd},{params,responseType:"blob"});
     }
     getVisitsDailyReport(dateStart:string,dateEnd:string,format:string){
         let params = new HttpParams().set("format",format);
-        return this.http.post(`${this.path}/visits-aday/sellers/report`,{dateStart,dateEnd},{params,responseType:"blob"});
+        return this.http.post(`${this.pathAltern}/visits-aday/sellers/report`,{dateStart,dateEnd},{params,responseType:"blob"});
     }
 }

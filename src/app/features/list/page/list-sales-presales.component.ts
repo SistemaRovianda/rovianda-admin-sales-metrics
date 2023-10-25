@@ -286,7 +286,7 @@ export class ListSalesPresalesComponent implements OnInit {
             this.roviandaApiService.getDailySalesDetails(this.folio.value,this.getParseDate(new Date(this.date.value)),this.getParseDate(new Date(this.dateTo.value)),"EXCEL").subscribe({
               next:(blob)=>{
                 this.isDownloading=false;
-                this.downloadFile(blob,this.getParseDate(new Date(this.date.value))+"-TO-"+this.getParseDate(new Date(this.date.value)),"DetalleDeVenta");
+                this.downloadFile(blob,this.getParseDate(new Date(this.date.value))+"-TO-"+this.getParseDate(new Date(this.dateTo.value)),"DetalleDeVenta");
               },
               error:()=>{
                 this.isDownloading=false;
@@ -297,7 +297,7 @@ export class ListSalesPresalesComponent implements OnInit {
             this.roviandaApiService.getEffectiveDeliverReport(this.folio.value,this.getParseDate(new Date(this.date.value)),this.getParseDate(new Date(this.dateTo.value)),"EXCEL").subscribe({
               next:(blob)=>{
                 this.isDownloading=false;
-                this.downloadFile(blob,this.getParseDate(new Date(this.date.value))+"-TO-"+this.getParseDate(new Date(this.date.value)),"EfectividadPedidoEntrega");
+                this.downloadFile(blob,this.getParseDate(new Date(this.date.value))+"-TO-"+this.getParseDate(new Date(this.dateTo.value)),"EfectividadPedidoEntrega");
               },
               error:()=>{
                 this.isDownloading=false;
@@ -308,7 +308,7 @@ export class ListSalesPresalesComponent implements OnInit {
             this.roviandaApiService.getVisitsDailyReport(this.getParseDate(new Date(this.date.value)),this.getParseDate(new Date(this.dateTo.value)),"EXCEL").subscribe({
               next:(blob)=>{
                 this.isDownloading=false;
-                this.downloadFile(blob,this.getParseDate(new Date(this.date.value))+"-TO-"+this.getParseDate(new Date(this.date.value)),"VisitaDiaria");
+                this.downloadFile(blob,this.getParseDate(new Date(this.date.value))+"-TO-"+this.getParseDate(new Date(this.dateTo.value)),"VisitaDiaria");
               },
               error:()=>{
                 this.isDownloading=false;
@@ -322,7 +322,7 @@ export class ListSalesPresalesComponent implements OnInit {
             this.roviandaApiService.getDailyPreSalesDetails(this.folio.value,this.getParseDate(new Date(this.date.value)),this.getParseDate(new Date(this.dateTo.value)),"EXCEL").subscribe({
               next:(blob)=>{
                 this.isDownloading=false;
-                this.downloadFile(blob,this.getParseDate(new Date(this.date.value))+"-TO-"+this.getParseDate(new Date(this.date.value)),"DetalleDePreVenta");
+                this.downloadFile(blob,this.getParseDate(new Date(this.date.value))+"-TO-"+this.getParseDate(new Date(this.dateTo.value)),"DetalleDePreVenta");
               },
               error:()=>{
                 this.isDownloading=false;
@@ -333,7 +333,7 @@ export class ListSalesPresalesComponent implements OnInit {
             this.roviandaApiService.getDailyPreSales(this.folio.value,this.getParseDate(new Date(this.date.value)),this.getParseDate(new Date(this.dateTo.value)),"EXCEL").subscribe({
               next:(blob)=>{
                 this.isDownloading=false;
-                this.downloadFile(blob,this.getParseDate(new Date(this.date.value))+"-TO-"+this.getParseDate(new Date(this.date.value)),"VentaDiariaPreventa");
+                this.downloadFile(blob,this.getParseDate(new Date(this.date.value))+"-TO-"+this.getParseDate(new Date(this.dateTo.value)),"VentaDiariaPreventa");
               },
               error:()=>{
                 this.isDownloading=false;
@@ -344,7 +344,7 @@ export class ListSalesPresalesComponent implements OnInit {
             this.roviandaApiService.getEffectiveDeliverReport(this.folio.value,this.getParseDate(new Date(this.date.value)),this.getParseDate(new Date(this.dateTo.value)),"EXCEL").subscribe({
               next:(blob)=>{
                 this.isDownloading=false;
-                this.downloadFile(blob,this.getParseDate(new Date(this.date.value))+"-TO-"+this.getParseDate(new Date(this.date.value)),"EfectividadPedidoEntrega");
+                this.downloadFile(blob,this.getParseDate(new Date(this.date.value))+"-TO-"+this.getParseDate(new Date(this.dateTo.value)),"EfectividadPedidoEntrega");
               },
               error:()=>{
                 this.isDownloading=false;
